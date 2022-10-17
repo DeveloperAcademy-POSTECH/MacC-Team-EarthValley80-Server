@@ -2,7 +2,7 @@
 name: Configurations
 about: 프로젝트 설정에 대한 issue 입니다
 title: "[Config] "
-labels: "\U0001F6E0Configuration, \U0001FA7ARefactoring"
+labels: "\U0001F6E0Configuration, \U0001F4D5Documentation"
 assignees: ''
 
 ---

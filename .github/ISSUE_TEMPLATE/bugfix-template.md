@@ -1,8 +1,10 @@
 ---
 name: Bugfix
-description: 에러 해결에 대한 issue 입니다.
+about: 에러 해결에 대한 issue 입니다.
 title: "[Bugfix] "
-labels: ["🐞Bugfix"]
+labels: "\U0001F41EBugfix"
+assignees: ''
+
 ---
 
 ## 💡 Error의 원인과 내용은 무엇인가요? 

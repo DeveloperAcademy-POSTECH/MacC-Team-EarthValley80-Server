@@ -2,7 +2,7 @@
 name: Features
 about: 새로운 기능 개발에 대한 issue 입니다.
 title: "[Feat] "
-labels: ''
+labels: "\U0001F477Enhancement"
 assignees: ''
 
 ---
