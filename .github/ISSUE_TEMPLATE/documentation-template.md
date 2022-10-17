@@ -1,8 +1,10 @@
 ---
 name: Documentations
-description: 문서 작업에 대한 issue 입니다.
+about: 문서 작업에 대한 issue 입니다.
 title: "[Doc] "
-labels: ["📕Documentation"]
+labels: "\U0001F4D5Documentation"
+assignees: ''
+
 ---
 
 ## 💡 무엇에 대한 문서작업인가요? 

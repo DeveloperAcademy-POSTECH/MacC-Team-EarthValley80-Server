@@ -1,8 +1,10 @@
 ---
 name: Refactoring
-description: 리팩터링에 대한 issue 입니다.
+about: 리팩터링에 대한 issue 입니다.
 title: "[Refac] "
-labels: ["🩺Refactoring"]
+labels: "\U0001FA7ARefactoring"
+assignees: ''
+
 ---
 
 ## 💡 무엇을/어떻게/왜 수정하나요? 

@@ -1,8 +1,10 @@
 ---
 name: Features
-description: 새로운 기능 개발에 대한 issue 입니다.
+about: 새로운 기능 개발에 대한 issue 입니다.
 title: "[Feat] "
-labels: ["👷Feature"]
+labels: ''
+assignees: ''
+
 ---
 
 ## 💡 어떤 기능을 구현하나요? 
