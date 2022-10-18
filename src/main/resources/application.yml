@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: local-postgresql, dev
+
+---
+# Local PostgreSQL
+spring:
+  config:
+    activate.on-profile: local-postgresql
+
+  datasource:
+    url: jdbc:postgresql://localhost/nier
+    username: postgres
+
+  jpa:
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
+
+---
+# Dev Defaults
+spring:
+  config:
+    activate.on-profile: dev
+
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
