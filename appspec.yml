@@ -11,7 +11,7 @@ permissions:
     group: ec2-user
     
 hooks:
-ApplicationStart:
-  - location: start.sh
-    timeout: 60
-    runas: ec2-user
+  ApplicationStart:
+    - location: start.sh
+      timeout: 60
+      runas: ec2-user
