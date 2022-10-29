@@ -1,4 +1,4 @@
-package com.ada.earthvalley.nier.configs;
+package com.ada.earthvalley.yomojomo.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
