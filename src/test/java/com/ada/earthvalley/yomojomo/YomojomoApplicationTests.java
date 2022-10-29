@@ -1,10 +1,10 @@
-package com.ada.earthvalley.nier;
+package com.ada.earthvalley.yomojomo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NierApplicationTests {
+class YomojomoApplicationTests {
 
 	@Test
 	void contextLoads() {

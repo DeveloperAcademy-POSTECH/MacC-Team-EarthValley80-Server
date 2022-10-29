@@ -1,13 +1,13 @@
-package com.ada.earthvalley.nier;
+package com.ada.earthvalley.yomojomo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NierApplication {
+public class YomojomoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NierApplication.class, args);
+		SpringApplication.run(YomojomoApplication.class, args);
 	}
 
 }
