@@ -1,9 +1,9 @@
 package com.ada.earthvalley.yomojomo.common.exceptions.errors;
 
+import org.springframework.http.HttpStatus;
 import com.ada.earthvalley.yomojomo.common.exceptions.ErrorCode;
 import com.ada.earthvalley.yomojomo.common.exceptions.ErrorInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 @RequiredArgsConstructor
 public enum TestError implements ErrorInfo {
