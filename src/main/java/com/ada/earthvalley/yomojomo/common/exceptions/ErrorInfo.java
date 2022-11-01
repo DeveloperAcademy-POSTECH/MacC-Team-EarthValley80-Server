@@ -3,8 +3,9 @@ package com.ada.earthvalley.yomojomo.common.exceptions;
 import org.springframework.http.HttpStatus;
 
 public interface ErrorInfo {
-    String getMessage();
-    int getCode();
+	String getMessage();
 
-    HttpStatus getStatus();
+	int getCode();
+
+	HttpStatus getStatus();
 }

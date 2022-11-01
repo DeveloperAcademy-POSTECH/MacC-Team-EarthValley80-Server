@@ -11,52 +11,55 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.ada.earthvalley.yomojomo.auth.jwt.BearerAuthenticationConverter;
 import com.ada.earthvalley.yomojomo.common.exceptions.handler.GlobalExceptionHandler;
 
 @WebMvcTest
 class GlobalExceptionHandlerTest {
-    private MockMvc mockMvc;
-    @MockBean
-    private ErrorInfo errorInfo;
-    @Autowired
-    ExceptionTestController controller;
+	private MockMvc mockMvc;
+	@MockBean
+	private ErrorInfo errorInfo;
+	@MockBean
+	private BearerAuthenticationConverter converter;
+	@Autowired
+	ExceptionTestController controller;
 
-    @BeforeEach
-    void initEach() {
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(controller)
-                .setControllerAdvice(GlobalExceptionHandler.class)
-                .build()
-        ;
-    }
+	@BeforeEach
+	void initEach() {
+		mockMvc = MockMvcBuilders
+			.standaloneSetup(controller)
+			.setControllerAdvice(GlobalExceptionHandler.class)
+			.build();
+	}
 
-    @DisplayName("exception handler - 성공")
-    @Test
-    void exception_handler() throws Exception {
-        final int code = 999;
-        final int status = 400;
-        final String message = "테스트 에러 메시지 입니다.";
-        when(errorInfo.getCode()).thenReturn(code);
-        when(errorInfo.getMessage()).thenReturn(message);
-        when(errorInfo.getStatus()).thenReturn(HttpStatus.BAD_REQUEST);
+	@DisplayName("exception handler - 성공")
+	@Test
+	void exception_handler() throws Exception {
+		final int code = 999;
+		final int status = 400;
+		final String message = "테스트 에러 메시지 입니다.";
+		when(errorInfo.getCode()).thenReturn(code);
+		when(errorInfo.getMessage()).thenReturn(message);
+		when(errorInfo.getStatus()).thenReturn(HttpStatus.BAD_REQUEST);
 
-        ResultActions perform = mockMvc.perform(
-                MockMvcRequestBuilders
-                        .get("/throws")
-        );
+		ResultActions perform = mockMvc.perform(
+			MockMvcRequestBuilders
+				.get("/throws")
+		);
 
-        perform
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message", message).exists())
-                .andExpect(jsonPath("$.status", status).exists())
-                .andExpect(jsonPath("$.code", code).exists())
-                .andExpect(jsonPath("$.timestamp").exists())
-                .andDo(print());
-    }
+		perform
+			.andExpect(status().isBadRequest())
+			.andExpect(jsonPath("$.message", message).exists())
+			.andExpect(jsonPath("$.status", status).exists())
+			.andExpect(jsonPath("$.code", code).exists())
+			.andExpect(jsonPath("$.timestamp").exists())
+			.andDo(print());
+	}
 }
