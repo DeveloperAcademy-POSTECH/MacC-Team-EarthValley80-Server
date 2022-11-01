@@ -8,11 +8,11 @@ import com.ada.earthvalley.yomojomo.common.exceptions.errors.YomojomoTestExcepti
 
 @RestController
 public class ExceptionTestController {
-    @Autowired
-    public ErrorInfo errorInfo;
+	@Autowired(required = false)
+	public ErrorInfo errorInfo;
 
-    @GetMapping("/throws")
-    void throwException() {
-        throw YomojomoTestException.of(errorInfo);
-    }
+	@GetMapping("/throws")
+	void throwException() {
+		throw YomojomoTestException.of(errorInfo);
+	}
 }

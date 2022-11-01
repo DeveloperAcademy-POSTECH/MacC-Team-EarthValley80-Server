@@ -27,7 +27,7 @@ public class BearerAuthenticationConverter implements AuthenticationConverter {
         final String scheme = splited[0];
         final String token = splited[1];
         if (!AUTHENTICATION_SCHEME.equals(scheme)) {
-            throw new IllegalArgumentException("Bearer가 아님");
+            throw new IllegalArgumentException("Bearer 가 아님");
         }
         return JwtAuthenticationToken.unauthenticated(token);
     }
