@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 // TODO: 싱글톤으로 리팩터링 (by Leo - 22.10.30)
 // TODO: Exception 수정 (by Leo - 22.10.30)
 @Component
-public class AuthorizationConverter implements AuthenticationConverter {
+public class BearerAuthenticationConverter implements AuthenticationConverter {
     private static final String AUTHENTICATION_SCHEME = "Bearer";
 
     @Override

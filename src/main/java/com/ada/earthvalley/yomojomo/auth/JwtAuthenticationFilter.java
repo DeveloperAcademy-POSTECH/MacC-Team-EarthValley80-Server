@@ -1,11 +1,9 @@
 package com.ada.earthvalley.yomojomo.auth;
 
-import com.ada.earthvalley.yomojomo.auth.jwt.AuthorizationConverter;
+import com.ada.earthvalley.yomojomo.auth.jwt.BearerAuthenticationConverter;
 import com.ada.earthvalley.yomojomo.auth.jwt.JwtAuthenticationToken;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -18,7 +16,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final AuthorizationConverter converter;
+    private final BearerAuthenticationConverter converter;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

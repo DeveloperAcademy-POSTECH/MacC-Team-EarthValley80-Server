@@ -9,14 +9,14 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-class AuthorizationConverterTest {
+class BearerAuthenticationConverterTest {
     private static String AUTHORIZATION_HEADER = "Authorization";
-    private AuthorizationConverter converter;
+    private BearerAuthenticationConverter converter;
     private MockHttpServletRequest request;
 
     @BeforeEach()
     void init() {
-        converter = new AuthorizationConverter();
+        converter = new BearerAuthenticationConverter();
         request = new MockHttpServletRequest();
     }
 
