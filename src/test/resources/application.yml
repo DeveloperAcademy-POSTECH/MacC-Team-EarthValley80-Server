@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: test, h2-test-for-postgresql
+
+---
+# H2 IN MEMORY TEST PROFILE
+spring:
+  config:
+    active.on-profile: h2-test-for-postgresql
+
+  datasource:
+    url: jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+---
+# TEST DEFAULTS
+spring:
+  config:
+    active.on-profile: test
+
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        globally_quoted_identifiers: true
+
