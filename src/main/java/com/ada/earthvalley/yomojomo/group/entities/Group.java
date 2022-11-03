@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 import com.ada.earthvalley.yomojomo.group.entities.enums.GroupType;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "groups")
 public class Group extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

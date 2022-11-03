@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 import com.ada.earthvalley.yomojomo.auth.entities.RefreshToken;
@@ -28,6 +30,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "users")
 public class User extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
