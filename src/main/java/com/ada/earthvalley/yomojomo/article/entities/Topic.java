@@ -22,7 +22,7 @@ public class Topic extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "topic_id")
-	private long id;
+	private Long id;
 
 	@Enumerated(EnumType.STRING)
 	private TopicType type;

@@ -23,7 +23,7 @@ public class Invitation extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "invitation_id")
-	private long id;
+	private Long id;
 
 	@OneToOne
 	@JoinColumn(name = "group_id", nullable = false)

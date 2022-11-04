@@ -23,7 +23,7 @@ public class Word extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "word_id")
-	private long id;
+	private Long id;
 
 	private String word;
 

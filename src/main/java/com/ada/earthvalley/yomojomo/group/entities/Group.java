@@ -30,7 +30,7 @@ public class Group extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "group_id")
-	private long id;
+	private Long id;
 
 	private String title;
 
