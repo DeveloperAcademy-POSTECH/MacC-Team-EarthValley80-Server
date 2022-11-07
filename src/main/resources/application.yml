@@ -9,7 +9,7 @@ spring:
     activate.on-profile: local-postgresql
 
   datasource:
-    url: jdbc:postgresql://localhost/nier
+    url: jdbc:postgresql://localhost/yomojomo
     username: postgres
 
   jpa:
