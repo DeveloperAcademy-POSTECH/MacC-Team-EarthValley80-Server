@@ -32,3 +32,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+---
+# Check Filters Registered
+spring:
+  config:
+    activate.on-profile: filters-registered
+
+logging:
+  level:
+    org.springframework.security.web.FilterChainProxy: DEBUG
