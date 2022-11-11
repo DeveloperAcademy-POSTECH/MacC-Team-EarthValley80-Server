@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
 public class User extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "user_id", columnDefinition = "uuid")
 	private UUID id;
 
 	private String username;

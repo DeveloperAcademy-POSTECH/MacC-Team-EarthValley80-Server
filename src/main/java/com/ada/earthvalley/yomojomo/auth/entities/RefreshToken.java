@@ -19,7 +19,7 @@ public class RefreshToken {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "token_id")
-	private long id;
+	private Long id;
 
 	private String refreshToken;
 
