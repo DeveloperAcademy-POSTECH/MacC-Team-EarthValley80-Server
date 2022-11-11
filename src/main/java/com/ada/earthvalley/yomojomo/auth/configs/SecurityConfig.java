@@ -17,12 +17,15 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		// http
+		// 	.addFilterAt(
+		// 		jwtAuthenticationFilter,
+		// 		BasicAuthenticationFilter.class)
+		// 	.authorizeRequests()
+		// 	.anyRequest().authenticated();
 		http
-			.addFilterAt(
-				jwtAuthenticationFilter,
-				BasicAuthenticationFilter.class)
 			.authorizeRequests()
-			.anyRequest().authenticated();
+			.anyRequest().permitAll();
 		return http.build();
 	}
 }

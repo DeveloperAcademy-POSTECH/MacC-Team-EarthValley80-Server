@@ -1,7 +1,7 @@
 package com.ada.earthvalley.yomojomo.nie.entities.enums;
 
 public enum NieProcessType {
-	GUESSING,
+	PREDICT,
 	READING,
 	WHEN,
 	WHO,

@@ -1,6 +1,5 @@
 package com.ada.earthvalley.yomojomo.nie.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,5 +16,5 @@ import lombok.NoArgsConstructor;
 public class NieContext {
 	@Enumerated(EnumType.STRING)
 	private NieProcessType lastProcess;
-	private long articleCursor;
+	private Integer articleCursor;
 }

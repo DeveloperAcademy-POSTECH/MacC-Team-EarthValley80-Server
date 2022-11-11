@@ -15,10 +15,13 @@ import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 import com.ada.earthvalley.yomojomo.nie.entities.enums.NieProcessType;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// TODO: AllArgs 생성자 리팩터링 (by Leo - 22.11.07)
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class NieProcess extends BaseEntity {
