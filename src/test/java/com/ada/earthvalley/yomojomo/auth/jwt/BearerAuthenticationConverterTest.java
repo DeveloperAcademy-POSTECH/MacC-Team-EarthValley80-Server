@@ -8,6 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
+import com.ada.earthvalley.yomojomo.auth.exceptions.YomojomoAuthException;
+import com.ada.earthvalley.yomojomo.common.exceptions.ErrorCode;
+
 class BearerAuthenticationConverterTest {
 	private static final String AUTHORIZATION_HEADER = "Authorization";
 	private BearerAuthenticationConverter converter;
@@ -33,9 +36,9 @@ class BearerAuthenticationConverterTest {
 		request.addHeader("Authorization", " bearer token token");
 
 		// when, then
-		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+		YomojomoAuthException exception = assertThrows(YomojomoAuthException.class,
 			() -> converter.convert(request));
-		assertThat(exception.getMessage()).isEqualTo("올바르지 않은 형식");
+		assertThat(exception.getMessage()).isEqualTo(ErrorCode.ERR2000.getMessage());
 	}
 
 	@Test
@@ -44,9 +47,9 @@ class BearerAuthenticationConverterTest {
 		// given
 		request.addHeader(AUTHORIZATION_HEADER, "Basic LeoBang");
 		// when, then
-		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+		YomojomoAuthException exception = assertThrows(YomojomoAuthException.class,
 			() -> converter.convert(request));
-		assertThat(exception.getMessage()).isEqualTo("Bearer 가 아님");
+		assertThat(exception.getMessage()).isEqualTo(ErrorCode.ERR2000.getMessage());
 	}
 
 	@Test
