@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 public enum TestError implements ErrorInfo {
 	;
 
-	private final ErrorCode code;
+	private ErrorCode code;
 
 	@Override
 	public String getMessage() {
