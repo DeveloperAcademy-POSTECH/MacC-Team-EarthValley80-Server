@@ -12,6 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.ada.earthvalley.yomojomo.auth.jwt.BearerAuthenticationConverter;
 import com.ada.earthvalley.yomojomo.auth.jwt.JwtAuthenticationToken;
+import com.ada.earthvalley.yomojomo.auth.jwt.JwtUtilsService;
+import com.ada.earthvalley.yomojomo.auth.jwt.dtos.YomojomoClaim;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,11 +21,13 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private final BearerAuthenticationConverter converter;
+	private final JwtUtilsService jwtUtilsService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws ServletException, IOException {
-		JwtAuthenticationToken convert = converter.convert(request);
+		JwtAuthenticationToken authentication = converter.convert(request);
+		YomojomoClaim claim = jwtUtilsService.verify(authentication.getCredentials());
 		filterChain.doFilter(request, response);
 	}
 
