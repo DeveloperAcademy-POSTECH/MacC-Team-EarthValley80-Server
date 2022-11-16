@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local-postgresql, dev
+    active: local-postgresql, dev, jwt
 
 ---
 # Local PostgreSQL
@@ -18,6 +18,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL82Dialect
 
+jwt:
+  claims:
+    issuer: "yomojomo.com"
+  secret-key: "yomojomo-05f92a6d-eb05-451d-a102-36e6450a5e97"
 ---
 # Dev Defaults
 spring:
