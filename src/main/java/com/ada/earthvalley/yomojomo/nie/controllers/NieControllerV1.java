@@ -22,9 +22,4 @@ public class NieControllerV1 {
 	) {
 		return ResponseEntity.ok(nieFetchService.fetchNie(nieId));
 	}
-
-	@GetMapping("/leo")
-	public String ab() {
-		return "으앙";
-	}
 }
