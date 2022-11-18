@@ -18,7 +18,6 @@ import com.ada.earthvalley.yomojomo.auth.jwt.dtos.YomojomoClaim;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private final BearerAuthenticationConverter converter;
 	private final JwtUtilsService jwtUtilsService;
