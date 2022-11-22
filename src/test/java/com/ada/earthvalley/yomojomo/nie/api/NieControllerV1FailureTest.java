@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.ada.earthvalley.yomojomo.auth.JwtAuthenticationFilter;
 import com.ada.earthvalley.yomojomo.common.exceptions.handler.GlobalExceptionHandler;
 import com.ada.earthvalley.yomojomo.nie.NieTestConst;
 import com.ada.earthvalley.yomojomo.nie.controllers.NieControllerV1;
@@ -24,16 +23,7 @@ import com.ada.earthvalley.yomojomo.nie.exceptions.NieError;
 import com.ada.earthvalley.yomojomo.nie.exceptions.YomojomoNieException;
 import com.ada.earthvalley.yomojomo.nie.services.NieFetchServiceV1;
 
-@WebMvcTest(
-	controllers = NieControllerV1.class,
-	excludeFilters = {
-		@ComponentScan.Filter(
-			type = FilterType.ASSIGNABLE_TYPE,
-			classes = {
-				JwtAuthenticationFilter.class
-			})
-	}
-)
+@WebMvcTest(controllers = NieControllerV1.class)
 class NieControllerV1FailureTest {
 	MockMvc mockMvc;
 	@Autowired

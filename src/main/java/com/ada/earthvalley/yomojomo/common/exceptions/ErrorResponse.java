@@ -19,7 +19,8 @@ public class ErrorResponse {
 		return ResponseEntity.status(info.getStatus()).body(new ErrorResponse(info));
 	}
 
-	private ErrorResponse(ErrorInfo info) {
+	// TODO: AuthenticationEntryPoint 정의와 함께 접근제어자 변경 (by Leo - 22.11.18)
+	public ErrorResponse(ErrorInfo info) {
 		this.status = stateToString(info.getStatus());
 		this.code = info.getCode();
 		this.message = info.getMessage();

@@ -26,7 +26,9 @@ class BearerAuthenticationConverterTest {
 	@DisplayName(".convert() 실패 - header 가 없음")
 	void convert_fail_header_null() {
 		// when, then
-		assertThat(converter.convert(request)).isNull();
+		assertThatThrownBy(() -> {
+			converter.convert(request);
+		}).isInstanceOf(YomojomoAuthException.class);
 	}
 
 	@Test

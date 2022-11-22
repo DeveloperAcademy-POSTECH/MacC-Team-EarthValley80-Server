@@ -15,15 +15,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.ada.earthvalley.yomojomo.auth.JwtAuthenticationFilter;
 import com.ada.earthvalley.yomojomo.common.exceptions.handler.GlobalExceptionHandler;
 import com.ada.earthvalley.yomojomo.configs.SpringRestDocsConfig;
 import com.ada.earthvalley.yomojomo.nie.NieTestConst;
@@ -32,16 +29,7 @@ import com.ada.earthvalley.yomojomo.nie.dtos.FetchNieResponse;
 import com.ada.earthvalley.yomojomo.nie.fixtures.NieResponseFixture;
 import com.ada.earthvalley.yomojomo.nie.services.NieFetchServiceV1;
 
-@WebMvcTest(
-	controllers = NieControllerV1.class,
-	excludeFilters = {
-		@ComponentScan.Filter(
-			type = FilterType.ASSIGNABLE_TYPE,
-			classes = {
-				JwtAuthenticationFilter.class
-			})
-	}
-)
+@WebMvcTest(controllers = NieControllerV1.class)
 @ExtendWith({RestDocumentationExtension.class})
 public class NieControllerV1RestDocs {
 	MockMvc mockMvc;
