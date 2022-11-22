@@ -9,7 +9,7 @@ name: Yomojomo CICD
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop, chore/6-CICD" ]
   pull_request:
     branches: [ "develop" ]
 
