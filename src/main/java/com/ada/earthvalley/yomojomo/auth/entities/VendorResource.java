@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.ada.earthvalley.yomojomo.auth.YomojomoOAuth2User;
 import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 import com.ada.earthvalley.yomojomo.auth.entities.enums.VendorType;
 import com.ada.earthvalley.yomojomo.user.entities.User;
@@ -36,4 +37,10 @@ public class VendorResource extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)
 	private VendorType type;
+
+	public VendorResource(YomojomoOAuth2User oAuth2User, User user) {
+		this.user = user;
+		this.vendorId = oAuth2User.getSocialId();
+		this.type = oAuth2User.getVendorType();
+	}
 }
