@@ -28,6 +28,19 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        
+    - name: env파일 생성     
+      run: |
+        cd ./src/main/resources/
+        touch ./env.properties
+        echo "JWT_CLAIMS_ISSUER=$JWT_CLAIMS_ISSUER" >> ./env.properties
+        echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> ./env.properties
+        cat env.properties
+      shell: bash
+      env:
+        JWT_CLAIMS_ISSUER: ${{ secrets.JWT_CLAIMS_ISSUER }}
+        JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
