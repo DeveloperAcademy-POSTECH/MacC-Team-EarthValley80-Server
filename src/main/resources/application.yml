@@ -20,8 +20,8 @@ spring:
 
 jwt:
   claims:
-    issuer: "yomojomo.com"
-  secret-key: "yomojomo-05f92a6d-eb05-451d-a102-36e6450a5e97"
+    issuer: $JWT_CLAIMS_ISSUER
+  secret-key: $JWT_SECRET_KEY
 ---
 # Dev Defaults
 spring:
