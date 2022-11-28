@@ -32,3 +32,9 @@ spring:
       hibernate:
         format_sql: true
 
+---
+# JWT
+jwt:
+  claims:
+    issuer: $JWT_CLAIMS_ISSUER
+  secret-key: $JWT_SECRET_KEY
