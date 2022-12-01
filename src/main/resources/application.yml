@@ -44,6 +44,10 @@ logging:
 
 ---
 # JWT
+spring:
+  config:
+    activate.on-profile: jwt
+
 jwt:
   claims:
     issuer: $JWT_CLAIMS_ISSUER
