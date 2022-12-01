@@ -35,8 +35,8 @@ jobs:
         touch ./env.properties
         echo "JWT_CLAIMS_ISSUER=$JWT_CLAIMS_ISSUER" >> ./env.properties
         echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> ./env.properties
-        echo "SPRING_SECURITY_KAKAO_CLIENT_ID" >> ./env.properties
-        echo "SPRING_SECURITY_KAKAO_CLIENT_SECRET" >> ./env.properties
+        echo "SPRING_SECURITY_KAKAO_CLIENT_ID=$SPRING_SECURITY_KAKAO_CLIENT_ID" >> ./env.properties
+        echo "SPRING_SECURITY_KAKAO_CLIENT_SECRET=$SPRING_SECURITY_KAKAO_CLIENT_SECRET" >> ./env.properties
         cat env.properties
       shell: bash
       env:
