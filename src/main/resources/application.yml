@@ -17,11 +17,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL82Dialect
-
-jwt:
-  claims:
-    issuer: $JWT_CLAIMS_ISSUER
-  secret-key: $JWT_SECRET_KEY
 ---
 # Dev Defaults
 spring:
@@ -45,3 +40,14 @@ spring:
 logging:
   level:
     org.springframework.security.web.FilterChainProxy: DEBUG
+    
+---
+ #JWT
+spring:
+  config:
+    activate.on-profile: jwt
+    
+jwt:
+  claims:
+    issuer: $JWT_CLAIMS_ISSUER
+  secret-key: $JWT_SECRET_KEY
