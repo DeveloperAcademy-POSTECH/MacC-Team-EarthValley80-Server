@@ -36,5 +36,5 @@ chmod +x $JAR_NAME
 
 nohup java -jar \
     -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/deploy/env.properties\
-    -Dspring.profiles.active=develop \
+    -Dspring.profiles.active=local-postgresql,dev,jwt\
     $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
