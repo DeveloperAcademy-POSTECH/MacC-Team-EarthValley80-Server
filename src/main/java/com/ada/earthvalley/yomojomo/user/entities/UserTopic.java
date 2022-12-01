@@ -32,4 +32,13 @@ public class UserTopic extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "topic_id")
 	private Topic topic;
+
+	public static UserTopic create(User user, Topic topic) {
+		UserTopic userTopic = new UserTopic();
+		userTopic.user = user;
+		user.getUserTopics().add(userTopic);
+		userTopic.topic = topic;
+		topic.getUserTopics().add(userTopic);
+		return userTopic;
+	}
 }
