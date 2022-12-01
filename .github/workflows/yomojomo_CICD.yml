@@ -35,12 +35,15 @@ jobs:
         touch ./env.properties
         echo "JWT_CLAIMS_ISSUER=$JWT_CLAIMS_ISSUER" >> ./env.properties
         echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> ./env.properties
+        echo "SPRING_SECURITY_KAKAO_CLIENT_ID" >> ./env.properties
+        echo "SPRING_SECURITY_KAKAO_CLIENT_SECRET" >> ./env.properties
         cat env.properties
       shell: bash
       env:
         JWT_CLAIMS_ISSUER: ${{ secrets.JWT_CLAIMS_ISSUER }}
         JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-
+        SPRING_SECURITY_KAKAO_CLIENT_ID: ${{ secrets.SPRING_SECURITY_KAKAO_CLIENT }}
+        SPRING_SECURITY_KAKAO_CLIENT_SECRET: ${{ secrets.SPRING_SECURITY_KAKAO_CLIENT_SECRET }}
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
