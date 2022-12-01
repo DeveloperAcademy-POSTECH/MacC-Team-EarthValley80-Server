@@ -1,4 +1,4 @@
-package com.ada.earthvalley.yomojomo.auth;
+package com.ada.earthvalley.yomojomo.auth.jwt;
 
 import java.io.IOException;
 
@@ -11,9 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.ada.earthvalley.yomojomo.auth.exceptions.YomojomoAuthException;
-import com.ada.earthvalley.yomojomo.auth.jwt.BearerAuthenticationConverter;
-import com.ada.earthvalley.yomojomo.auth.jwt.JwtAuthenticationToken;
-import com.ada.earthvalley.yomojomo.auth.jwt.JwtUtilsService;
+import com.ada.earthvalley.yomojomo.auth.jwt.services.JwtUtilsService;
 import com.ada.earthvalley.yomojomo.auth.jwt.dtos.YomojomoClaim;
 import com.ada.earthvalley.yomojomo.common.exceptions.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;

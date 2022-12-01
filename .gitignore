@@ -134,5 +134,6 @@ gradle-app.setting
 
 # 모든 구분된 profile의 property 파일을 무시함.
 /**/resources/application**.yml
+!application-oauth2.yml
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,intellij,java,macos

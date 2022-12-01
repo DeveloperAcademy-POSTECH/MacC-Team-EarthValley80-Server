@@ -29,8 +29,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.ada.earthvalley.yomojomo.auth.configs.WebSecurityConfig;
 import com.ada.earthvalley.yomojomo.auth.exceptions.AuthError;
 import com.ada.earthvalley.yomojomo.auth.jwt.AuthTestController;
-import com.ada.earthvalley.yomojomo.auth.jwt.JwtSecretsService;
-import com.ada.earthvalley.yomojomo.auth.jwt.JwtUtilsService;
+import com.ada.earthvalley.yomojomo.auth.jwt.services.JwtSecretsService;
+import com.ada.earthvalley.yomojomo.auth.jwt.services.JwtUtilsService;
 import com.ada.earthvalley.yomojomo.auth.jwt.dtos.YomojomoClaim;
 
 import io.jsonwebtoken.Jwts;
@@ -80,7 +80,7 @@ public class SecurityFilterChainTest {
 		Constructor<YomojomoClaim> constructor = YomojomoClaim.class.getDeclaredConstructor(UUID.class);
 		constructor.setAccessible(true);
 		YomojomoClaim yomojomoClaim = constructor.newInstance(uuid);
-		String jws = jwtUtilsService.create(yomojomoClaim);
+		String jws = jwtUtilsService.createAccessToken(yomojomoClaim);
 		assertThat(jws).isNotNull();
 
 		// when, then

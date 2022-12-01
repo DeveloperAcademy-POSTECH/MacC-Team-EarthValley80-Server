@@ -1,4 +1,4 @@
-package com.ada.earthvalley.yomojomo.auth.jwt;
+package com.ada.earthvalley.yomojomo.auth.jwt.services;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -6,22 +6,27 @@ import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
+import com.ada.earthvalley.yomojomo.auth.jwt.enums.TokenType;
 import com.ada.earthvalley.yomojomo.common.propertyServices.JwtPropertyService;
 
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtSecretsService extends JwtPropertyService {
-	private static final long TOKEN_VALID_TIME = 10 * 60 * 60 * 1000L;
-
 	public Date getIssuedAt() {
 		return new Date();
 	}
 
-	public Date getExpiredAt() {
-		return new Date(getIssuedAt().getTime() + TOKEN_VALID_TIME);
+	public Date getExpiredAt(TokenType type) {
+		switch (type) {
+			case ACCESS_TOKEN:
+				return TokenTimeUtils.getAccessTokenExpiredDate();
+			case REFRESH_TOKEN:
+				return TokenTimeUtils.getRefreshTokenExpiredDate();
+			default:
+				return new Date();
+		}
 	}
 
 	public Key getSecretKey() throws DecodingException {

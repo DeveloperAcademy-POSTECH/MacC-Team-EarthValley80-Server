@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local-postgresql, dev, jwt
+    active: local-postgresql, dev, jwt, oauth2, filters-registered
 
 ---
 # Local PostgreSQL
@@ -17,6 +17,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL82Dialect
+
 ---
 # Dev Defaults
 spring:
@@ -40,13 +41,13 @@ spring:
 logging:
   level:
     org.springframework.security.web.FilterChainProxy: DEBUG
-    
+
 ---
- #JWT
+# JWT
 spring:
   config:
     activate.on-profile: jwt
-    
+
 jwt:
   claims:
     issuer: $JWT_CLAIMS_ISSUER
