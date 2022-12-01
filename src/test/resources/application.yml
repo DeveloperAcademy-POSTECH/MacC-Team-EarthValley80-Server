@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test, h2-test-for-postgresql, jwt
+    active: test, h2-test-for-postgresql, jwt, oauth2
 
 ---
 # H2 IN MEMORY TEST PROFILE

@@ -24,12 +24,11 @@ import com.ada.earthvalley.yomojomo.group.entities.GroupUser;
 import com.ada.earthvalley.yomojomo.user.entities.enums.UserRole;
 import com.ada.earthvalley.yomojomo.word.entities.Word;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -59,4 +58,8 @@ public class User extends BaseEntity {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "token_id")
 	private RefreshToken refreshToken;
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = new RefreshToken(refreshToken);
+	}
 }

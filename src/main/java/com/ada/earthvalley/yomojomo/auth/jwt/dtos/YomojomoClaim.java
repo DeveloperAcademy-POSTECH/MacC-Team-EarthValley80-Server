@@ -2,6 +2,8 @@ package com.ada.earthvalley.yomojomo.auth.jwt.dtos;
 
 import java.util.UUID;
 
+import com.ada.earthvalley.yomojomo.user.entities.User;
+
 import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,5 +18,9 @@ public class YomojomoClaim {
 
 	public static YomojomoClaim of(Claims claims) {
 		return new YomojomoClaim(UUID.fromString(claims.getSubject()));
+	}
+
+	public static YomojomoClaim ofUser(User user) {
+		return new YomojomoClaim(user.getId());
 	}
 }

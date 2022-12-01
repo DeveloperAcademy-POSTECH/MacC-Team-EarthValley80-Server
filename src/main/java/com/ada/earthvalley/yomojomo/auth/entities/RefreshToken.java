@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.ada.earthvalley.yomojomo.auth.jwt.services.TokenTimeUtils;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +25,11 @@ public class RefreshToken {
 
 	private String refreshToken;
 
-	private LocalDateTime expiredAt;
+	private LocalDateTime expiredAt = TokenTimeUtils.getRefreshTokenLocalDateTime();
 
 	private LocalDateTime issuedAt = LocalDateTime.now();
+
+	public RefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
 }

@@ -1,4 +1,4 @@
-package com.ada.earthvalley.yomojomo.auth.jwt;
+package com.ada.earthvalley.yomojomo.auth.jwt.services;
 
 import static com.ada.earthvalley.yomojomo.auth.exceptions.AuthError.*;
 
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ada.earthvalley.yomojomo.auth.exceptions.YomojomoAuthException;
 import com.ada.earthvalley.yomojomo.auth.jwt.dtos.YomojomoClaim;
+import com.ada.earthvalley.yomojomo.auth.jwt.enums.TokenType;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -27,12 +28,20 @@ public class JwtUtilsService {
 		return verify(parseJws(jwsString));
 	}
 
-	public String create(YomojomoClaim claim) throws InvalidKeyException {
+	public String createAccessToken(YomojomoClaim claim) throws InvalidKeyException {
+		return create(claim, TokenType.ACCESS_TOKEN);
+	}
+
+	public String createRefreshToken(YomojomoClaim claim) throws InvalidKeyException {
+		return create(claim, TokenType.REFRESH_TOKEN);
+	}
+
+	private String create(YomojomoClaim claim, TokenType type) throws InvalidKeyException {
 		return Jwts.builder()
 			.setSubject(claim.getUserId())
 			.setIssuer(jwtSecretsService.getIssuer())
 			.setIssuedAt(jwtSecretsService.getIssuedAt())
-			.setExpiration(jwtSecretsService.getExpiredAt())
+			.setExpiration(jwtSecretsService.getExpiredAt(type))
 			.signWith(jwtSecretsService.getSecretKey())
 			.compact();
 	}
