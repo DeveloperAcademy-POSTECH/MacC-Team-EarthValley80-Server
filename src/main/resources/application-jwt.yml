@@ -1,4 +1,4 @@
 jwt:
   claims:
-    issuer: $JWT_CLAIMS_ISSUER
-  secret-key: $JWT_SECRET_KEY
+    issuer: ${JWT_CLAIMS_ISSUER}
+  secret-key: ${JWT_SECRET_KEY}
