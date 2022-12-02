@@ -20,15 +20,19 @@ public class OAuth2ApiService {
 	private final TokenDomainService tokenDomainService;
 	private final UserDomainService userDomainService;
 
-	public LoginResponse oauth2LoginOrSignUp(YomojomoOAuth2User user) throws NoSuchElementException {
-		VendorResource vendorResource = vendorResourceService.findVendorResourceOrThrow(user);
-		User userFromVendorResource = userDomainService.findByVendorResource(vendorResource);
+	public LoginResponse oauth2Login(YomojomoOAuth2User user) throws YomojomoUserException {
+		try {
+			VendorResource vendorResource = vendorResourceService.findVendorResourceOrThrow(user);
+			User userFromVendorResource = userDomainService.findByVendorResource(vendorResource);
 
-		// 존재할 경우 access token 생성, refresh token 생성 후 저장
-		YomojomoToken accessToken = tokenDomainService.createAccessToken(userFromVendorResource);
-		YomojomoToken refreshToken = tokenDomainService.createAndSaveRefreshToken(userFromVendorResource);
+			// 존재할 경우 access token 생성, refresh token 생성 후 저장
+			YomojomoToken accessToken = tokenDomainService.createAccessToken(userFromVendorResource);
+			YomojomoToken refreshToken = tokenDomainService.createAndSaveRefreshToken(userFromVendorResource);
 
-		return new LoginResponse(accessToken, refreshToken);
+			return new LoginResponse(accessToken, refreshToken);
+		} catch (NoSuchElementException e) {
+			throw new YomojomoAuthException(AuthError.NOT_A_MEMBER);
+		}
 	}
 
 	public LoginResponse oauth2SignUp(YomojomoOAuth2User user) {

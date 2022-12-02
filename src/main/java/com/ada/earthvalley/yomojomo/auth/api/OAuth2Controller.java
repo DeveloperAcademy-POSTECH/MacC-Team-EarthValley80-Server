@@ -24,11 +24,8 @@ public class OAuth2Controller {
 
 	@GetMapping("/login")
 	public ResponseEntity<LoginResponse> login(@YomojomoUser YomojomoOAuth2User user) {
-		try {
-			return ResponseEntity.ok(authApiService.oauth2LoginOrSignUp(user));
-		} catch (NoSuchElementException e) {
-			return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "/api/oauth2/signup").build();
-		}
+		return ResponseEntity.ok(authApiService.oauth2Login(user));
+
 	}
 
 	@GetMapping("/signup")

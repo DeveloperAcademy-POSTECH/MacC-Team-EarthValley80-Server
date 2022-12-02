@@ -31,9 +31,23 @@ class OAuth2ApiServiceTest {
 	@Mock
 	UserDomainService userDomainService;
 
-	@DisplayName("oauth2LoginOrSignUp - 성공")
+	@DisplayName("oauth2Login - 실패 (회원가입이 안 되어있는 유저)")
 	@Test
-	void oauth2LoginOrSignUp() throws Exception {
+	void oauth2Login_fail_not_authorized() {
+		// when
+		when(vendorResourceService.findVendorResourceOrThrow(any(YomojomoOAuth2User.class)))
+			.thenThrow(NoSuchElementException.class);
+
+		// then
+		assertThatThrownBy(() -> {
+			oAuth2ApiService.oauth2Login(mock(YomojomoOAuth2User.class));
+		})
+			.isInstanceOf(YomojomoAuthException.class);
+	}
+
+	@DisplayName("oauth2Login - 성공")
+	@Test
+	void oauth2Login_success() throws Exception {
 		// given
 		Constructor<VendorResource> constructor = VendorResource.class.getDeclaredConstructor();
 		constructor.setAccessible(true);
