@@ -8,7 +8,10 @@ import com.ada.earthvalley.yomojomo.auth.dtos.YomojomoToken;
 import com.ada.earthvalley.yomojomo.auth.entities.VendorResource;
 import com.ada.earthvalley.yomojomo.auth.YomojomoOAuth2User;
 import com.ada.earthvalley.yomojomo.auth.dtos.LoginResponse;
+import com.ada.earthvalley.yomojomo.auth.exceptions.AuthError;
+import com.ada.earthvalley.yomojomo.auth.exceptions.YomojomoAuthException;
 import com.ada.earthvalley.yomojomo.user.entities.User;
+import com.ada.earthvalley.yomojomo.user.exceptions.YomojomoUserException;
 import com.ada.earthvalley.yomojomo.user.services.UserDomainService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,12 +38,12 @@ public class OAuth2ApiService {
 		}
 	}
 
-	public LoginResponse oauth2SignUp(YomojomoOAuth2User user) {
-		User createdUser = userDomainService.createUserWithOAuth2(user);
-
-		YomojomoToken accessToken = tokenDomainService.createAccessToken(createdUser);
-		YomojomoToken refreshToken = tokenDomainService.createAndSaveRefreshToken(createdUser);
-
-		return new LoginResponse(accessToken, refreshToken);
+	public String oauth2SignUp(YomojomoOAuth2User user) throws YomojomoAuthException {
+		try {
+			vendorResourceService.throwIfVendorResourceExist(user);
+			return userDomainService.createUserWithOAuth2(user).getIdString();
+		} catch (IllegalStateException e) {
+			throw new YomojomoAuthException(AuthError.ALREADY_A_MEMBER);
+		}
 	}
 }

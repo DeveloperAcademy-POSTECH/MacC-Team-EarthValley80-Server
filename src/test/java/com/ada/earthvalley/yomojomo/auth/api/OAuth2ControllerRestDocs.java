@@ -11,7 +11,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.methods.HttpHead;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -65,7 +67,6 @@ class OAuth2ControllerRestDocs {
 			.apply(springSecurity())
 			.apply(SpringRestDocsConfig.configurer(restDocumentation))
 			.build();
-
 	}
 
 	@WithMockUser
@@ -78,7 +79,7 @@ class OAuth2ControllerRestDocs {
 		LoginResponse loginResponse = new LoginResponse(accessToken, refreshToken);
 
 		// when
-		when(oAuth2ApiService.oauth2LoginOrSignUp(null))
+		when(oAuth2ApiService.oauth2Login(null))
 			.thenReturn(loginResponse);
 
 		// then
@@ -108,32 +109,7 @@ class OAuth2ControllerRestDocs {
 				)
 			));
 
-		verify(oAuth2ApiService, times(1)).oauth2LoginOrSignUp(null);
-	}
-
-	@WithMockUser
-	@DisplayName("로그인 - 성공 (회원가입 endpoint 로 리다이렉트)")
-	@Test
-	void 로그인_회원가입으로_리다이렉트() throws Exception {
-		// when
-		when(oAuth2ApiService.oauth2LoginOrSignUp(null))
-			.thenThrow(NoSuchElementException.class);
-
-		// then
-		mvc.perform(
-				RestDocumentationRequestBuilders.get(LOGIN_URI)
-					.contentType(MediaType.APPLICATION_JSON)
-			)
-			.andDo(print())
-			.andExpect(status().isFound())
-			.andExpect(header().string(HttpHeaders.LOCATION, SIGNUP_URI))
-			.andDo(document(DOCS_OUTPUT_DIR,
-				responseHeaders(
-					headerWithName(HttpHeaders.LOCATION).description("회원가입 URI")
-				)
-			));
-
-		verify(oAuth2ApiService, times(1)).oauth2LoginOrSignUp(null);
+		verify(oAuth2ApiService, times(1)).oauth2Login(null);
 	}
 
 	@WithMockUser
@@ -143,35 +119,22 @@ class OAuth2ControllerRestDocs {
 		// given
 		YomojomoToken accessToken = YomojomoToken.createAccessToken("access_token");
 		YomojomoToken refreshToken = YomojomoToken.createRefreshToken("refresh_token");
-		LoginResponse loginResponse = new LoginResponse(accessToken, refreshToken);
 
 		// when
 		when(oAuth2ApiService.oauth2SignUp(null))
-			.thenReturn(loginResponse);
+			.thenReturn(UUID.randomUUID().toString());
 
 		// then
 		mvc.perform(RestDocumentationRequestBuilders
-				.get(SIGNUP_URI)
+				.post(SIGNUP_URI)
 				.contentType(MediaType.APPLICATION_JSON)
 			)
 			.andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.accessToken.token", is("access_token")))
-			.andExpect(jsonPath("$.accessToken.iat").exists())
-			.andExpect(jsonPath("$.accessToken.exp").exists())
-			.andExpect(jsonPath("$.refreshToken.token", is("refresh_token")))
-			.andExpect(jsonPath("$.refreshToken.iat").exists())
-			.andExpect(jsonPath("$.refreshToken.exp").exists())
+			.andExpect(status().isCreated())
+			.andExpect(header().exists(HttpHeaders.LOCATION))
 			.andDo(document(DOCS_OUTPUT_DIR,
-				responseFields(
-					fieldWithPath("accessToken").description("JWT 인증 토큰"),
-					fieldWithPath("accessToken.token").description("토큰 값"),
-					fieldWithPath("accessToken.iat").description("토큰 발행 시점"),
-					fieldWithPath("accessToken.exp").description("토큰 만료 시점"),
-					fieldWithPath("refreshToken").description("JWT 재발급 토큰"),
-					fieldWithPath("refreshToken.token").description("토큰 값"),
-					fieldWithPath("refreshToken.iat").description("토큰 발행 시점"),
-					fieldWithPath("refreshToken.exp").description("토큰 만료 시점")
+				responseHeaders(
+					headerWithName(HttpHeaders.LOCATION).description("생성된 유저의 URI")
 				)
 			));
 
