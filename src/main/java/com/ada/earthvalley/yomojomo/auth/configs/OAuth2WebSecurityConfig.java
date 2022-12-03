@@ -17,7 +17,7 @@ public class OAuth2WebSecurityConfig {
 			.oauth2Login(oauth2 -> {
 				oauth2
 					.authorizationEndpoint(authorization -> {
-						authorization.baseUri("/api/oauth2/authorization");
+						authorization.baseUri("/oauth2/authorization");
 					})
 					.userInfoEndpoint(userInfo -> {
 						userInfo.userService(new YomojomoOAuth2UserService());
