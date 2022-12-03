@@ -7,11 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.ada.earthvalley.yomojomo.auth.jwt.JwtAuthenticationFilter;
 import com.ada.earthvalley.yomojomo.auth.jwt.BearerAuthenticationConverter;
+import com.ada.earthvalley.yomojomo.auth.jwt.JwtAuthenticationFilter;
 import com.ada.earthvalley.yomojomo.auth.jwt.services.JwtUtilsService;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfig {
 	@Autowired
 	private JwtUtilsService jwtUtilsService;

@@ -7,7 +7,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.ada.earthvalley.yomojomo.auth.oauth2.services.YomojomoOAuth2UserService;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class OAuth2WebSecurityConfig {
 
 	@Bean
