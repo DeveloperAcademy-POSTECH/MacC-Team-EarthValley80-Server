@@ -27,7 +27,7 @@ public class OAuth2Controller {
 		try {
 			return ResponseEntity.ok(authApiService.oauth2LoginOrSignUp(user));
 		} catch (NoSuchElementException e) {
-			return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "/api/oauth2/signup").build();
+			return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "/oauth2/signup").build();
 		}
 	}
 
