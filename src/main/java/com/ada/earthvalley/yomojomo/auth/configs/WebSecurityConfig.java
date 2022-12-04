@@ -29,9 +29,7 @@ public class WebSecurityConfig {
 		http
 			.addFilterAt(jwtAuthenticationFilter(), BasicAuthenticationFilter.class)
 			.antMatcher("/api/**")
-			.csrf(csrf -> {
-				csrf.disable();
-			})
+			.csrf().disable()
 			.authorizeRequests(c -> {
 				c.anyRequest().authenticated();
 			});

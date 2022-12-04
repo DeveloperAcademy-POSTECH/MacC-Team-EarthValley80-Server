@@ -29,13 +29,11 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-  sql:
-    init:
-      mode: always
+
 ---
 # Check Filters Registered
 spring:
