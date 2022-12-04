@@ -21,4 +21,12 @@ public class VendorResourceService {
 		return vendorResourceRepository.findByVendorIdAndType(user.getSocialId(),
 			user.getVendorType()).orElseThrow(NoSuchElementException::new);
 	}
+
+	public void throwIfVendorResourceExist(YomojomoOAuth2User user) throws IllegalStateException {
+		vendorResourceRepository.findByVendorIdAndType(
+				user.getSocialId(), user.getVendorType())
+			.ifPresent(v -> {
+				throw new IllegalStateException();
+			});
+	}
 }

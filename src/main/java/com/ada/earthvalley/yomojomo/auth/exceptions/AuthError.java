@@ -14,7 +14,10 @@ import lombok.RequiredArgsConstructor;
 public enum AuthError implements ErrorInfo {
 	ILLEGAL_AUTH_HEADER(ERR2000),
 	INVALID_JWT(ERR2001),
-	JWT_EXPIRED(ERR2002);
+	JWT_EXPIRED(ERR2002),
+	NOT_A_MEMBER(ERR2003),
+	OAUTH2_AUTHENTICATION_REQUIRED(ERR2004),
+	ALREADY_A_MEMBER(ERR2005);
 
 	private final ErrorCode code;
 

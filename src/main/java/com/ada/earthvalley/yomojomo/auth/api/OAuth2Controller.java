@@ -1,11 +1,10 @@
 package com.ada.earthvalley.yomojomo.auth.api;
 
-import java.util.NoSuchElementException;
+import java.net.URI;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,15 +23,13 @@ public class OAuth2Controller {
 
 	@GetMapping("/login")
 	public ResponseEntity<LoginResponse> login(@YomojomoUser YomojomoOAuth2User user) {
-		try {
-			return ResponseEntity.ok(authApiService.oauth2LoginOrSignUp(user));
-		} catch (NoSuchElementException e) {
-			return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "/api/oauth2/signup").build();
-		}
+		return ResponseEntity.ok(authApiService.oauth2Login(user));
+
 	}
 
-	@GetMapping("/signup")
-	public ResponseEntity<LoginResponse> signup(@YomojomoUser YomojomoOAuth2User user) {
-		return ResponseEntity.ok(authApiService.oauth2SignUp(user));
+	@PostMapping("/signup")
+	public ResponseEntity signup(@YomojomoUser YomojomoOAuth2User user) {
+		String userId = authApiService.oauth2SignUp(user);
+		return ResponseEntity.created(URI.create("/api/user/" + userId)).build();
 	}
 }
