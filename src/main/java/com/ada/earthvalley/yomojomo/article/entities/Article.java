@@ -1,7 +1,5 @@
 package com.ada.earthvalley.yomojomo.article.entities;
 
-import java.sql.Struct;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import com.ada.earthvalley.yomojomo.article.exceptions.ArticleError;
 import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +28,9 @@ public class Article extends BaseEntity {
 
 	@NotNull
 	private String initialId;
+
+	@NotNull
+	private String imageUrl;
 
 	@NotNull
 	private String title;
