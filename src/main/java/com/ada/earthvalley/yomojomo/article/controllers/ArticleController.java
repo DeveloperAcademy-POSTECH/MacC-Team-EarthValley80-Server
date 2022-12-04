@@ -22,4 +22,9 @@ public class ArticleController {
 	public ResponseEntity<FetchArticleListResponse> getPersonalizedArticle(@YomojomoUser SecurityUser user) {
 		return ResponseEntity.ok(articleApiService.getPersonalizedArticleLists(user));
 	}
+
+	@GetMapping()
+	public ResponseEntity<FetchArticleListResponse> getWeeklyArticle() {
+		return ResponseEntity.ok(articleApiService.getWeeklyArticleLists());
+	}
 }
