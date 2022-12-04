@@ -53,4 +53,19 @@ class ArticleRepositoryTest extends BaseDataJpaTest {
 			.isBetween(LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
 
 	}
+
+	@DisplayName("findByCreatedAt - 성공")
+	@Sql("classpath:sql/article.sql")
+	@Test
+	void findByCreatedAt_success() throws Exception {
+		// when
+		List<Article> result = articleRepository.findAllByCreatedAtBetween(
+			LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
+
+		// then
+		assertThat(result).hasSize(3);
+		assertThat(result.get(0).getCreatedAt())
+			.isBetween(LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
+
+	}
 }

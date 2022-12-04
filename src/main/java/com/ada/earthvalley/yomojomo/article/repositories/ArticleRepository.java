@@ -10,4 +10,6 @@ import com.ada.earthvalley.yomojomo.article.entities.Article;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 	List<Article> findAllByMajorTopicAndCreatedAtBetween(String majorTopic,
 		LocalDateTime startOfWeek, LocalDateTime endOfWeek);
+
+	List<Article> findAllByCreatedAtBetween(LocalDateTime startOfWeek, LocalDateTime endOfWeek);
 }
