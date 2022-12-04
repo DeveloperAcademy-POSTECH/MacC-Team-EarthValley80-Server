@@ -1,13 +1,13 @@
 package com.ada.earthvalley.yomojomo.article.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-
-import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,27 +16,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Article extends BaseEntity {
+public class Body {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "article_id")
 	private Long id;
-
-  @NotNull
-	private Long topicId;
-  
 	@NotNull
-	private String initialId;
-
+	private Long index;
 	@NotNull
-	private String title;
-
-	@NotNull
-	private String author;
-
-	@NotNull
-	private String source;
-
-	@NotNull
-	private String majorTopic;
+	private String content;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "section_id")
+	private Section section;
 }
