@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ada.earthvalley.yomojomo.article.dtos.FetchArticleListResponse;
 import com.ada.earthvalley.yomojomo.article.entities.Article;
 import com.ada.earthvalley.yomojomo.article.entities.enums.MajorTopicType;
+import com.ada.earthvalley.yomojomo.article.exceptions.ArticleError;
+import com.ada.earthvalley.yomojomo.article.exceptions.YomojomoArticleException;
 import com.ada.earthvalley.yomojomo.article.repositories.ArticleRepository;
 import com.ada.earthvalley.yomojomo.auth.SecurityUser;
 import com.ada.earthvalley.yomojomo.user.entities.User;
@@ -57,6 +59,9 @@ public class ArticleApiService {
 				LocalDateTime.now().with(DayOfWeek.MONDAY),
 				LocalDateTime.now()
 			);
+		if (articleList.size() == 0) {
+			throw new YomojomoArticleException(ArticleError.ARTICLE_NOT_FOUND);
+		}
 
 		return FetchArticleListResponse.ofList(articleList);
 	}
