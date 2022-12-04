@@ -2,6 +2,8 @@ package com.ada.earthvalley.yomojomo.article.repositories;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -41,11 +43,14 @@ class ArticleRepositoryTest extends BaseDataJpaTest {
 	@Test
 	void findByMajorTopic_success() throws Exception {
 		// when
-		List<Article> result = articleRepository.findByMajorTopic("CURRENT_AFFAIR");
+		List<Article> result = articleRepository.findByMajorTopicAndCreatedAtBetween("CURRENT_AFFAIR",
+			LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
 
 		// then
-		assertThat(result).hasSize(3);
+		assertThat(result).hasSize(2);
 		assertThat(result.get(0).getMajorTopic()).isEqualTo("CURRENT_AFFAIR");
+		assertThat(result.get(0).getCreatedAt())
+			.isBetween(LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
 
 	}
 }
