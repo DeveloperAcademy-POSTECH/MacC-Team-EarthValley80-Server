@@ -50,4 +50,14 @@ public class ArticleApiService {
 
 		return FetchArticleListResponse.ofList(articleList);
 	}
+
+	public FetchArticleListResponse getWeeklyArticleLists() {
+		List<Article> articleList = articleRepository
+			.findAllByCreatedAtBetween(
+				LocalDateTime.now().with(DayOfWeek.MONDAY),
+				LocalDateTime.now()
+			);
+
+		return FetchArticleListResponse.ofList(articleList);
+	}
 }
