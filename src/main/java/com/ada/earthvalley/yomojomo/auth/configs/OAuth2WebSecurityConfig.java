@@ -14,11 +14,11 @@ public class OAuth2WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.antMatcher("/api/oauth2/**")
+			.antMatcher("/oauth2/**")
 			.oauth2Login(oauth2 -> {
 				oauth2
 					.authorizationEndpoint(authorization -> {
-						authorization.baseUri("/api/oauth2/authorization");
+						authorization.baseUri("/oauth2/authorization");
 					})
 					.userInfoEndpoint(userInfo -> {
 						userInfo.userService(new YomojomoOAuth2UserService());
