@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.ada.earthvalley.yomojomo.activity.entities.Activity;
+import com.ada.earthvalley.yomojomo.activity.entities.Reading;
 import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 import com.ada.earthvalley.yomojomo.auth.entities.RefreshToken;
 import com.ada.earthvalley.yomojomo.group.entities.GroupUser;
@@ -53,6 +55,13 @@ public class User extends BaseEntity {
 	@OneToMany(mappedBy = "user")
 	private List<GroupUser> groupUsers = new ArrayList<>();
 
+	// TODO: User 가 삭제되어도 Reading 은 삭제되지 않게 null 생명주기 분리 및 null 값 채워넣기 (by Leo -22.12.03)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Reading> readings = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Activity> activities = new ArrayList<>();
+
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
@@ -72,5 +81,23 @@ public class User extends BaseEntity {
 	public User(String username, String nickname) {
 		this.username = username;
 		this.nickname = nickname;
+	}
+
+	public void addActivities(Activity activity) {
+		this.activities.add(activity);
+		activity.setUser(this);
+	}
+
+
+	public void addReadings(Reading reading) {
+		this.readings.add(reading);
+		reading.setUser(this);
+	}
+
+	public void addReadings(List<Reading> readings) {
+		readings.forEach(reading -> {
+			this.readings.add(reading);
+			reading.setUser(this);
+		});
 	}
 }

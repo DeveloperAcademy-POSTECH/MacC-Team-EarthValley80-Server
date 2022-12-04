@@ -23,7 +23,12 @@ public enum ErrorCode {
 	ERR2005(2005, HttpStatus.BAD_REQUEST, "이미 회원인 유저입니다."),
 
 	// 3000 - Topic
-	ERR3000(3000, HttpStatus.NOT_FOUND, "존재하지 않는 토픽입니다.");
+	ERR3000(3000, HttpStatus.NOT_FOUND, "존재하지 않는 토픽입니다."),
+
+	// 4000 - Article
+	ERR4000(4000, HttpStatus.NOT_FOUND, "존재하지 않는 글입니다."),
+
+	;
 
 	private final int code;
 	private final HttpStatus status;
