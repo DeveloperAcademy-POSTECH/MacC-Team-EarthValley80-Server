@@ -66,4 +66,25 @@ class VendorResourceServiceTest {
 		// then
 		assertThat(resultVendorResource).isNotNull();
 	}
+
+	@DisplayName("throwIfVendorResourceExist - 실패 (이미 존재함)")
+	@Test
+	void throwIfVendorResourceExist_실패_이미존재함() {
+		// given
+		YomojomoOAuth2User mock = mock(YomojomoOAuth2User.class);
+
+		// when
+		when(mock.getSocialId())
+			.thenReturn("string");
+		when(mock.getVendorType())
+			.thenReturn(VendorType.KAKAO);
+		when(vendorResourceRepository.findByVendorIdAndType(anyString(), any(VendorType.class)))
+			.thenReturn(Optional.of(mock(VendorResource.class)));
+
+		// then
+		assertThatThrownBy(() -> {
+			vendorResourceService.throwIfVendorResourceExist(mock);
+		})
+			.isInstanceOf(IllegalStateException.class);
+	}
 }
