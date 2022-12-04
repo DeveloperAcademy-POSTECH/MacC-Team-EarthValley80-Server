@@ -6,10 +6,10 @@ import java.util.Date;
 public class TokenTimeUtils {
 	// Access Token 만료기한 - 1일
 	// Refresh Token 만료기한 - 30일
-	private static final long ACCESS_TOKEN_VALID_MILLI_TIME = 1 * 24 * 60 * 60 * 1000L;
+	private static final long ACCESS_TOKEN_VALID_MILLI_TIME = 30 * 24 * 60 * 60 * 1000L;
 	private static final long REFRESH_TOKEN_VALID_MILLI_TIME = 30 * 24 * 60 * 60 * 1000L;
 
-	private static final long  ACCESS_TOKEN_VALID_TIME = 1 * 24 * 60 * 60L;
+	private static final long  ACCESS_TOKEN_VALID_TIME = 30 * 24 * 60 * 60L;
 	private static final long  REFRESH_TOKEN_VALID_TIME = 30 * 24 * 60 * 60L;
 
 	public static Date getAccessTokenExpiredDate() {
