@@ -1,5 +1,7 @@
 package com.ada.earthvalley.yomojomo.article.services;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,13 +33,20 @@ public class ArticleApiService {
 	public FetchArticleListResponse getPersonalizedArticleLists(SecurityUser currentUser) {
 		User user = userRepository.findById(currentUser.getId())
 			.orElseThrow(() -> new YomojomoUserException(UserError.USER_NOT_FOUND));
+
+		// TODO: 만약 user가 topic이 없을시 어떻게 할지(2022.12.05 - Daon)
+		// TODO: 중복 topic 필터링 로직 최적화(2022.12.05 - Daon)
 		List<UserTopic> topicList = user.getUserTopics();
 		List<MajorTopicType> majorTopicList = topicList.stream().map(topic -> topic.getTopic().getMajorTopic())
 			.collect(Collectors.toList());
 
 		Set<MajorTopicType> filteredTopics = new HashSet<>(majorTopicList);
 
-		List<Article> articleList = articleRepository.findByMajorTopic(filteredTopics.toString());
+		List<Article> articleList = articleRepository
+			.findAllByMajorTopicAndCreatedAtBetween(filteredTopics.toString(),
+				LocalDateTime.now().with(DayOfWeek.MONDAY),
+				LocalDateTime.now()
+			);
 
 		return FetchArticleListResponse.ofList(articleList);
 	}
