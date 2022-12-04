@@ -19,9 +19,14 @@ class ArticleRepositoryTest extends BaseDataJpaTest {
 	@DisplayName("findById - 성공")
 	@Test
 	void findById_성공() throws Exception {
-		Constructor<Article> constructor = Article.class.getDeclaredConstructor();
-		constructor.setAccessible(true);
-		Article article = constructor.newInstance();
+		Article article = Article.builder()
+			.author(" author")
+			.title("title")
+			.initialId("1")
+			.topicId(1L)
+			.majorTopic("majorTopic")
+			.source("source")
+			.build();
 		em.persist(article);
 		flushAndClear();
 
