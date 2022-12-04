@@ -45,12 +45,14 @@ public class Article extends BaseEntity {
 	private String majorTopic;
 
 	@Builder
-	public Article(Long topicId, String initialId, String title, String author, String source, String majorTopic) {
+	public Article(Long topicId, String initialId, String title, String author, String source,
+		String majorTopic, String imageUrl) {
 		this.topicId = topicId;
 		this.initialId = initialId;
 		this.title = title;
 		this.author = author;
 		this.source = source;
 		this.majorTopic = majorTopic;
+		this.imageUrl = imageUrl;
 	}
 }
