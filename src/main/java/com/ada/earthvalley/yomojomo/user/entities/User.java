@@ -24,6 +24,7 @@ import com.ada.earthvalley.yomojomo.group.entities.GroupUser;
 import com.ada.earthvalley.yomojomo.user.entities.enums.UserRole;
 import com.ada.earthvalley.yomojomo.word.entities.Word;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -65,5 +66,11 @@ public class User extends BaseEntity {
 
 	public String getIdString() {
 		return this.id.toString();
+	}
+
+	@Builder
+	public User(String username, String nickname) {
+		this.username = username;
+		this.nickname = nickname;
 	}
 }
