@@ -43,7 +43,7 @@ class ArticleRepositoryTest extends BaseDataJpaTest {
 	@Test
 	void findByMajorTopic_success() throws Exception {
 		// when
-		List<Article> result = articleRepository.findByMajorTopicAndCreatedAtBetween("CURRENT_AFFAIR",
+		List<Article> result = articleRepository.findAllByMajorTopicAndCreatedAtBetween("CURRENT_AFFAIR",
 			LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
 
 		// then

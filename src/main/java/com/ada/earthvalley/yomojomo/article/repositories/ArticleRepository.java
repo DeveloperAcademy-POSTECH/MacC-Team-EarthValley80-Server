@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ada.earthvalley.yomojomo.article.entities.Article;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-	List<Article> findByMajorTopicAndCreatedAtBetween(String majorTopic,
+	List<Article> findAllByMajorTopicAndCreatedAtBetween(String majorTopic,
 		LocalDateTime startOfWeek, LocalDateTime endOfWeek);
 }
