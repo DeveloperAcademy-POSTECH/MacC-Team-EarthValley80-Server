@@ -65,7 +65,7 @@ public class ArticleControllerRestDocs {
 
 	@DisplayName("[GET] /api/articles")
 	@Test
-	void 모든_토픽_가져오기() throws Exception {
+	void get_personalized_article() throws Exception {
 		// given
 		System.out.println(articles.size());
 		FetchArticleListResponse response = FetchArticleListResponse.ofList(articles);
@@ -92,7 +92,7 @@ public class ArticleControllerRestDocs {
 					fieldWithPath("articleInfoResponseList").description("아티클의 정보"),
 					fieldWithPath("articleInfoResponseList[].id").description("아티클의 id"),
 					fieldWithPath("articleInfoResponseList[].title").description("아티클의 제목"),
-					fieldWithPath("articleInfoResponseList[].majorTopic").description("아티클의 대분류 토픽"),
+					fieldWithPath("articleInfoResponseList[].subTopic").description("아티클의 소분류 토픽"),
 					fieldWithPath("articleInfoResponseList[].imageUrl").description("아티클의 image주소")
 				)
 			));

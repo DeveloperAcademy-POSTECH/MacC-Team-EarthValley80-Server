@@ -28,6 +28,7 @@ class ArticleRepositoryTest extends BaseDataJpaTest {
 			.author(" author")
 			.title("title")
 			.initialId("1")
+			.imageUrl("image")
 			.topicId(1L)
 			.majorTopic("majorTopic")
 			.source("source")
