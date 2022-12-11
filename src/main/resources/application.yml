@@ -19,6 +19,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL82Dialect
     defer-datasource-initialization: true
 
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+      data-locations: classpath:data.sql
+
 ---
 # Dev Defaults
 spring:

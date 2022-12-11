@@ -28,7 +28,7 @@ public enum ErrorCode {
 	// 4000 - Article
 	ERR4000(4000, HttpStatus.NOT_FOUND, "존재하지 않는 글입니다."),
 
-	;
+	ERR4001(4001, HttpStatus.NOT_FOUND, "이번주의 글이 존재하지 않습니다. ");
 
 	private final int code;
 	private final HttpStatus status;

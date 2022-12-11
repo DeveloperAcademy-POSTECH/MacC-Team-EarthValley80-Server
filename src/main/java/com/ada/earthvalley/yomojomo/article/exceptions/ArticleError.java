@@ -11,7 +11,8 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum ArticleError implements ErrorInfo {
-	ARTICLE_NOT_FOUND(ERR4000);
+	ARTICLE_NOT_FOUND(ERR4000),
+	WEEKLY_ARTICLE_NOT_FOUND(ERR4001);
 	private final ErrorCode code;
 
 	@Override

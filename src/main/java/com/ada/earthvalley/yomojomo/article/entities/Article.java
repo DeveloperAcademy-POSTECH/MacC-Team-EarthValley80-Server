@@ -1,19 +1,19 @@
 package com.ada.earthvalley.yomojomo.article.entities;
 
-import java.sql.Struct;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import com.ada.earthvalley.yomojomo.article.exceptions.ArticleError;
 import com.ada.earthvalley.yomojomo.common.baseEntities.BaseEntity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +34,9 @@ public class Article extends BaseEntity {
 	private String initialId;
 
 	@NotNull
+	private String imageUrl;
+
+	@NotNull
 	private String title;
 
 	@NotNull
@@ -45,13 +48,18 @@ public class Article extends BaseEntity {
 	@NotNull
 	private String majorTopic;
 
+	@OneToMany(mappedBy = "article")
+	private List<Section> sectionList = new ArrayList<>();
+
 	@Builder
-	public Article(Long topicId, String initialId, String title, String author, String source, String majorTopic) {
+	public Article(Long topicId, String initialId, String title, String author, String source,
+		String majorTopic, String imageUrl) {
 		this.topicId = topicId;
 		this.initialId = initialId;
 		this.title = title;
 		this.author = author;
 		this.source = source;
 		this.majorTopic = majorTopic;
+		this.imageUrl = imageUrl;
 	}
 }
