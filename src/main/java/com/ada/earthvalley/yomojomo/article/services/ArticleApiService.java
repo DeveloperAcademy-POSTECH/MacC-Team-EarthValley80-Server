@@ -1,5 +1,7 @@
 package com.ada.earthvalley.yomojomo.article.services;
 
+import static com.ada.earthvalley.yomojomo.article.exceptions.ArticleError.*;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -10,10 +12,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ada.earthvalley.yomojomo.article.dtos.FetchArticleDetailResponse;
 import com.ada.earthvalley.yomojomo.article.dtos.FetchArticleListResponse;
 import com.ada.earthvalley.yomojomo.article.entities.Article;
-import com.ada.earthvalley.yomojomo.article.entities.enums.MajorTopicType;
-import com.ada.earthvalley.yomojomo.article.exceptions.ArticleError;
 import com.ada.earthvalley.yomojomo.article.exceptions.YomojomoArticleException;
 import com.ada.earthvalley.yomojomo.article.repositories.ArticleRepository;
 import com.ada.earthvalley.yomojomo.auth.SecurityUser;
@@ -39,13 +40,13 @@ public class ArticleApiService {
 		// TODO: 만약 user가 topic이 없을시 어떻게 할지(2022.12.05 - Daon)
 		// TODO: 중복 topic 필터링 로직 최적화(2022.12.05 - Daon)
 		List<UserTopic> topicList = user.getUserTopics();
-		List<MajorTopicType> majorTopicList = topicList.stream().map(topic -> topic.getTopic().getMajorTopic())
+		List<String> majorTopicList = topicList.stream().map(topic -> topic.getTopic().getMajorTopic().toString())
 			.collect(Collectors.toList());
 
-		Set<MajorTopicType> filteredTopics = new HashSet<>(majorTopicList);
+		Set<String> filteredTopics = new HashSet<>(majorTopicList);
 
 		List<Article> articleList = articleRepository
-			.findAllByMajorTopicAndCreatedAtBetween(filteredTopics.toString(),
+			.findAllByMajorTopicsAndCreatedAtBetween(List.copyOf(filteredTopics),
 				LocalDateTime.now().with(DayOfWeek.MONDAY),
 				LocalDateTime.now()
 			);
@@ -60,9 +61,15 @@ public class ArticleApiService {
 				LocalDateTime.now()
 			);
 		if (articleList.size() == 0) {
-			throw new YomojomoArticleException(ArticleError.ARTICLE_NOT_FOUND);
+			throw new YomojomoArticleException(ARTICLE_NOT_FOUND);
 		}
 
 		return FetchArticleListResponse.ofList(articleList);
+	}
+
+	public FetchArticleDetailResponse getArticleDetail(Long articleId) {
+		Article article = articleRepository.findById(articleId)
+			.orElseThrow(() -> new YomojomoArticleException(ARTICLE_NOT_FOUND));
+		return FetchArticleDetailResponse.ofArticle(article);
 	}
 }

@@ -26,8 +26,7 @@ public class FetchArticleListResponse {
 		private final long id;
 		private final String title;
 
-		// TODO: subTopic보내주는건지, majorTopic인지 확인하기 (2022.11.04 - Daon)
-		private final String majorTopic;
+		private final String subTopic;
 
 		private final String imageUrl;
 
@@ -35,7 +34,8 @@ public class FetchArticleListResponse {
 			this.id = article.getId();
 			this.title = article.getTitle();
 			this.imageUrl = article.getImageUrl();
-			this.majorTopic = article.getMajorTopic();
+			// TODO: subTopic보내주는 걸로 바꿔야됨 (2022.11.04 - Daon)
+			this.subTopic = article.getMajorTopic();
 		}
 	}
 }

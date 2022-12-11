@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -43,7 +44,8 @@ class ArticleRepositoryTest extends BaseDataJpaTest {
 	@Test
 	void findByMajorTopic_success() throws Exception {
 		// when
-		List<Article> result = articleRepository.findAllByMajorTopicAndCreatedAtBetween("CURRENT_AFFAIR",
+		List<Article> result = articleRepository.findAllByMajorTopicsAndCreatedAtBetween(
+			Collections.singletonList("CURRENT_AFFAIR"),
 			LocalDateTime.now().with(LocalTime.MIN), LocalDateTime.now());
 
 		// then
