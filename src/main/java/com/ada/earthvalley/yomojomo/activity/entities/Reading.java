@@ -16,6 +16,7 @@ import com.ada.earthvalley.yomojomo.group.entities.Group;
 import com.ada.earthvalley.yomojomo.user.entities.User;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,4 +44,11 @@ public class Reading {
 
 	@Enumerated(EnumType.STRING)
 	private ReadingStatus status;
+
+	@Builder
+	public Reading(Long articleId, ReadingStatus status, User user) {
+		this.articleId = articleId;
+		this.status = status;
+		setUser(user);
+	}
 }
