@@ -78,12 +78,16 @@ public class ArticleApiService {
 		return FetchArticleDetailResponse.ofArticle(article);
 	}
 
+	@Transactional
 	public void saveArticleReaction(Long articleId, SecurityUser currentUser, SaveReactionRequest reactionRequest) {
 		User user = userRepository.findById(currentUser.getId())
 			.orElseThrow(() -> new YomojomoUserException(UserError.USER_NOT_FOUND));
 		Article article = articleRepository.findById(articleId)
 			.orElseThrow(() -> new YomojomoArticleException(ARTICLE_NOT_FOUND));
-		reactionRequest.getReactionsList().stream().map(emoji -> reactionRepository.save(Reaction.builder()
-			.emoji(Emoji.valueOf(emoji.toString())).articleId(articleId).user(user).build()));
+
+		reactionRequest.getReactionsList()
+			.stream().forEach(emoji -> reactionRepository.save(Reaction.builder()
+				.emoji(Emoji.valueOf(emoji.getEmoji())).articleId(articleId).user(user).build()));
+		System.out.println("test");
 	}
 }
