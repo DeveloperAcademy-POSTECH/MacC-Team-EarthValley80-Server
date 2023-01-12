@@ -14,9 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ada.earthvalley.yomojomo.article.dtos.FetchArticleDetailResponse;
 import com.ada.earthvalley.yomojomo.article.dtos.FetchArticleListResponse;
+import com.ada.earthvalley.yomojomo.article.dtos.SaveReactionRequest;
 import com.ada.earthvalley.yomojomo.article.entities.Article;
+import com.ada.earthvalley.yomojomo.article.entities.Reaction;
+import com.ada.earthvalley.yomojomo.article.entities.enums.Emoji;
 import com.ada.earthvalley.yomojomo.article.exceptions.YomojomoArticleException;
 import com.ada.earthvalley.yomojomo.article.repositories.ArticleRepository;
+import com.ada.earthvalley.yomojomo.article.repositories.ReactionRepository;
 import com.ada.earthvalley.yomojomo.auth.SecurityUser;
 import com.ada.earthvalley.yomojomo.user.entities.User;
 import com.ada.earthvalley.yomojomo.user.entities.UserTopic;
@@ -32,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 public class ArticleApiService {
 	private final ArticleRepository articleRepository;
 	private final UserRepository userRepository;
+	private final ReactionRepository reactionRepository;
 
 	public FetchArticleListResponse getPersonalizedArticleLists(SecurityUser currentUser) {
 		User user = userRepository.findById(currentUser.getId())
@@ -71,5 +76,18 @@ public class ArticleApiService {
 		Article article = articleRepository.findById(articleId)
 			.orElseThrow(() -> new YomojomoArticleException(ARTICLE_NOT_FOUND));
 		return FetchArticleDetailResponse.ofArticle(article);
+	}
+
+	@Transactional
+	public void saveArticleReaction(Long articleId, SecurityUser currentUser, SaveReactionRequest reactionRequest) {
+		User user = userRepository.findById(currentUser.getId())
+			.orElseThrow(() -> new YomojomoUserException(UserError.USER_NOT_FOUND));
+		Article article = articleRepository.findById(articleId)
+			.orElseThrow(() -> new YomojomoArticleException(ARTICLE_NOT_FOUND));
+
+		reactionRequest.getReactionsList()
+			.stream().forEach(emoji -> reactionRepository.save(Reaction.builder()
+				.emoji(Emoji.valueOf(emoji.getEmoji())).articleId(articleId).user(user).build()));
+		System.out.println("test");
 	}
 }
