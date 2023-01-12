@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class ReadingController {
 
 	@PostMapping("/articles/{articleId}/reading-contexts")
 	public ResponseEntity<ReadingListResponse> fetchReadings(@YomojomoUser SecurityUser user,
-		CreateReadingRequest createReadingRequest,
+		@RequestBody CreateReadingRequest createReadingRequest,
 		@PathVariable Long articleId) {
 		Long readingId = readingApiService.createReadingService(user, createReadingRequest, articleId);
 		return ResponseEntity.created(URI.create("/api/articles/" + articleId + "readings/" + readingId)).build();
